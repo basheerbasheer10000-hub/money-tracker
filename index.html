@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ACRU - Financial Analytics Dashboard</title>
+  <meta name="description" content="ACRU Modern Financial Management and Analytics Dashboard">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- App Canvas Frame -->
+  <div class="app-container" id="app">
+
+    <!-- ==========================================
+         SIDEBAR NAVIGATION
+         ========================================== -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="#" class="brand-logo">
+          <span>ACRU</span>
+        </a>
+      </div>
+
+      <nav class="nav-section">
+        <!-- Dashboard (Active) -->
+        <button class="nav-item active" id="nav-dashboard">
+          <div class="nav-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="7" height="7" rx="1.5"></rect>
+              <rect x="14" y="3" width="7" height="7" rx="1.5"></rect>
+              <rect x="14" y="14" width="7" height="7" rx="1.5"></rect>
+              <rect x="3" y="14" width="7" height="7" rx="1.5"></rect>
+            </svg>
+          </div>
+          <span class="nav-text">Dashboard</span>
+        </button>
+
+        <!-- Accounts -->
+        <button class="nav-item" id="nav-accounts">
+          <div class="nav-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </div>
+          <span class="nav-text">Accounts</span>
+        </button>
+
+        <!-- Transactions (Expandable Group) -->
+        <div class="nav-group expanded" id="transactions-group">
+          <button class="nav-item" id="nav-transactions" aria-expanded="true">
+            <div class="nav-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="17 1 21 5 17 9"></polyline>
+                <path d="M3 11V9a4 4 0 0 1 4-4h14"></path>
+                <polyline points="7 23 3 19 7 15"></polyline>
+                <path d="M21 13v2a4 4 0 0 1-4 4H3"></path>
+              </svg>
+            </div>
+            <span class="nav-text">Transactions</span>
+            <svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="nav-sublist">
+            <a href="#history" class="nav-subitem active">
+              <span>History</span>
+              <span class="nav-badge">19</span>
+            </a>
+            <a href="#integration" class="nav-subitem">
+              <span>Integration</span>
+            </a>
+            <a href="#reports" class="nav-subitem">
+              <span>Reports</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Cash flow -->
+        <button class="nav-item" id="nav-cashflow">
+          <div class="nav-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <path d="M16 10a4 4 0 0 1-8 0"></path>
+            </svg>
+          </div>
+          <span class="nav-text">Cash flow</span>
+        </button>
+
+        <!-- Budget -->
+        <button class="nav-item" id="nav-budget">
+          <div class="nav-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M12 2a10 10 0 0 1 10 10H12V2z"></path>
+            </svg>
+          </div>
+          <span class="nav-text">Budget</span>
+        </button>
+
+        <!-- Investments -->
+        <button class="nav-item" id="nav-investments">
+          <div class="nav-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+              <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+            </svg>
+          </div>
+          <span class="nav-text">Investments</span>
+        </button>
+      </nav>
+
+      <!-- Sidebar Bottom Links & Upgrade Card -->
+      <div class="sidebar-bottom">
+        <nav class="nav-section">
+          <!-- Learning center -->
+          <button class="nav-item" id="nav-learning">
+            <div class="nav-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+              </svg>
+            </div>
+            <span class="nav-text">Learning center</span>
+          </button>
+
+          <!-- Support -->
+          <button class="nav-item" id="nav-support">
+            <div class="nav-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
+                <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
+              </svg>
+            </div>
+            <span class="nav-text">Support</span>
+          </button>
+        </nav>
+
+        <!-- Upgrade to Pro Card -->
+        <div class="pro-card" id="pro-card">
+          <div class="pro-card-header">
+            <div class="pro-card-icon">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+              </svg>
+            </div>
+            <button class="pro-card-close" id="btn-close-pro" aria-label="Close Pro banner">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+          <h4 class="pro-card-title">Upgrade to Pro!</h4>
+          <p class="pro-card-desc">Full financial insights with analytics and graphs.</p>
+          <button class="btn-pro" id="btn-upgrade-now">Upgrade now</button>
+        </div>
+
+        <!-- Collapse Sidebar Button -->
+        <button class="btn-collapse" id="btn-collapse-sidebar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="11 17 6 12 11 7"></polyline>
+            <polyline points="18 17 13 12 18 7"></polyline>
+          </svg>
+          <span>Collapse sidebar</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- ==========================================
+         MAIN CONTENT WRAPPER
+         ========================================== -->
+    <main class="main-wrapper">
+
+      <!-- Top Header -->
+      <header class="top-header">
+        <div class="search-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" class="search-input" id="global-search" placeholder="Quick search" autocomplete="off">
+        </div>
+
+        <div class="header-actions">
+          <!-- Notification Bell -->
+          <button class="btn-icon-header" id="btn-notifications" aria-label="Notifications">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+            </svg>
+            <span class="notification-dot"></span>
+          </button>
+
+          <!-- Settings Gear -->
+          <button class="btn-icon-header" id="btn-settings" aria-label="Settings">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3"></circle>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+            </svg>
+          </button>
+
+          <!-- User Profile Chip -->
+          <div class="user-profile-badge" id="user-profile">
+            <svg class="user-avatar" viewBox="0 0 36 36" fill="none">
+              <circle cx="18" cy="18" r="18" fill="#1e293b"/>
+              <!-- Stylized avatar face -->
+              <circle cx="18" cy="14" r="6" fill="#f8d7b8"/>
+              <path d="M12 12C12 9.5 14.5 7.5 18 7.5C21.5 7.5 24 9.5 24 12C24 13 23 14 21 14C19 14 17 11 15 12C13 13 12 12.5 12 12Z" fill="#332219"/>
+              <path d="M8 32C8 26 12 23 18 23C24 23 28 26 28 32" fill="#3b82f6"/>
+              <polygon points="18,23 15,30 21,30" fill="#ffffff"/>
+            </svg>
+            <div class="user-info">
+              <span class="user-name">Michael Johnson</span>
+              <span class="user-email">m.johnson@finex.com</span>
+            </div>
+          </div>
+
+          <!-- Add Widget Button -->
+          <button class="btn-add-widget" id="btn-add-widget">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="3" ry="3"></rect>
+              <line x1="12" y1="8" x2="12" y2="16"></line>
+              <line x1="8" y1="12" x2="16" y2="12"></line>
+            </svg>
+            <span>Add widget</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Dashboard Grid -->
+      <div class="dashboard-grid">
+
+        <!-- ==========================================
+             LEFT / CENTER COLUMN
+             ========================================== -->
+        <div class="dashboard-left-col">
+
+          <!-- TOP: Balance Overview & Income Metrics -->
+          <div class="card balance-overview-card">
+            <!-- Chart Area -->
+            <div class="balance-chart-section">
+              <div class="balance-header">
+                <div class="balance-title-group">
+                  <h2 id="main-balance-val">$12,450</h2>
+                  <span>Balance overview</span>
+                </div>
+                <div class="balance-controls">
+                  <button class="pill-select" id="btn-filter-period">
+                    <span id="period-label">7d</span>
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                  </button>
+                  <button class="btn-chart-type active" id="btn-chart-bar" title="Bar Chart">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                      <line x1="18" y1="20" x2="18" y2="10"></line>
+                      <line x1="12" y1="20" x2="12" y2="4"></line>
+                      <line x1="6" y1="20" x2="6" y2="14"></line>
+                    </svg>
+                  </button>
+                  <button class="btn-chart-type" id="btn-chart-line" title="Line Chart">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Legend -->
+              <div class="chart-legend">
+                <div class="legend-item">
+                  <span class="legend-color-box legend-savings"></span>
+                  <span>Savings</span>
+                </div>
+                <div class="legend-item">
+                  <span class="legend-color-box legend-income"></span>
+                  <span>Income</span>
+                </div>
+                <div class="legend-item">
+                  <span class="legend-color-box legend-expenses"></span>
+                  <span>Expenses</span>
+                </div>
+              </div>
+
+              <!-- Stacked Bar Chart with Interactive Tooltip -->
+              <div class="chart-container" id="bar-chart-container">
+                <!-- Y-Axis -->
+                <div class="chart-y-axis">
+                  <span>30</span>
+                  <span>20</span>
+                  <span>10</span>
+                  <span>0</span>
+                  <span>-10</span>
+                </div>
+
+                <div class="chart-bars-area">
+                  <!-- Subtle Horizontal Grid Lines -->
+                  <div class="chart-grid-lines">
+                    <div class="chart-grid-line"></div>
+                    <div class="chart-grid-line"></div>
+                    <div class="chart-grid-line"></div>
+                    <div class="chart-grid-line"></div>
+                    <div class="chart-grid-line"></div>
+                  </div>
+
+                  <!-- Bars Row -->
+                  <div class="chart-bars-row">
+                    <!-- Sun -->
+                    <div class="bar-col" data-day="Sun" data-date="Sunday, 4 Jan 2025" data-savings="120" data-income="380" data-expenses="210">
+                      <div class="bar-stack" style="height: 52px;">
+                        <div class="bar-segment" style="height: 100%; background: #eef1f5;"></div>
+                      </div>
+                    </div>
+
+                    <!-- Mon -->
+                    <div class="bar-col" data-day="Mon" data-date="Monday, 5 Jan 2025" data-savings="190" data-income="520" data-expenses="340">
+                      <div class="bar-stack" style="height: 72px;">
+                        <div class="bar-segment" style="height: 100%; background: #eef1f5;"></div>
+                      </div>
+                    </div>
+
+                    <!-- Tue -->
+                    <div class="bar-col" data-day="Tue" data-date="Tuesday, 6 Jan 2025" data-savings="150" data-income="480" data-expenses="300">
+                      <div class="bar-stack" style="height: 86px;">
+                        <div class="bar-segment" style="height: 100%; background: #eef1f5;"></div>
+                      </div>
+                    </div>
+
+                    <!-- Wed (Active Highlighted Column in Reference Image) -->
+                    <div class="bar-col active" id="bar-wed" data-day="Wed" data-date="Wednesday, 7 Jan 2025" data-savings="240" data-income="700" data-expenses="460">
+                      <!-- Floating Tooltip Card -->
+                      <div class="chart-tooltip" id="chart-tooltip">
+                        <div class="tooltip-date" id="tooltip-date">Wednesday, 7 Jan 2025</div>
+                        <div class="tooltip-row">
+                          <div class="tooltip-label">
+                            <span class="legend-color-box legend-savings"></span>
+                            <span>Savings</span>
+                          </div>
+                          <span class="tooltip-val" id="tooltip-savings">$240</span>
+                        </div>
+                        <div class="tooltip-row">
+                          <div class="tooltip-label">
+                            <span class="legend-color-box legend-income"></span>
+                            <span>Income</span>
+                          </div>
+                          <span class="tooltip-val" id="tooltip-income">$700</span>
+                        </div>
+                        <div class="tooltip-row">
+                          <div class="tooltip-label">
+                            <span class="legend-color-box legend-expenses"></span>
+                            <span>Expences</span>
+                          </div>
+                          <span class="tooltip-val" id="tooltip-expenses">$460</span>
+                        </div>
+                      </div>
+
+                      <div class="bar-stack" style="height: 140px;">
+                        <div class="bar-segment segment-savings" style="height: 26px;"></div>
+                        <div class="bar-segment segment-income" style="height: 84px;"></div>
+                        <div class="bar-segment segment-expenses" style="height: 30px;"></div>
+                      </div>
+                    </div>
+
+                    <!-- Thu -->
+                    <div class="bar-col" data-day="Thu" data-date="Thursday, 8 Jan 2025" data-savings="210" data-income="610" data-expenses="410">
+                      <div class="bar-stack" style="height: 98px;">
+                        <div class="bar-segment" style="height: 100%; background: #eef1f5;"></div>
+                      </div>
+                    </div>
+
+                    <!-- Fri -->
+                    <div class="bar-col" data-day="Fri" data-date="Friday, 9 Jan 2025" data-savings="180" data-income="590" data-expenses="380">
+                      <div class="bar-stack" style="height: 114px;">
+                        <div class="bar-segment" style="height: 100%; background: #eef1f5;"></div>
+                      </div>
+                    </div>
+
+                    <!-- Sat -->
+                    <div class="bar-col" data-day="Sat" data-date="Saturday, 10 Jan 2025" data-savings="290" data-income="750" data-expenses="490">
+                      <div class="bar-stack" style="height: 130px;">
+                        <div class="bar-segment" style="height: 100%; background: #eef1f5;"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- X-Axis Labels -->
+                  <div class="chart-x-axis">
+                    <span class="x-label">Sun</span>
+                    <span class="x-label">Mon</span>
+                    <span class="x-label">Tue</span>
+                    <span class="x-label">Wed</span>
+                    <span class="x-label">Thu</span>
+                    <span class="x-label">Fri</span>
+                    <span class="x-label">Sat</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Stats Column (Total income, Total expences, Saved balance) -->
+            <div class="balance-metrics-col">
+              <!-- Total income -->
+              <div class="metric-group">
+                <span class="metric-label">Total income</span>
+                <span class="metric-val">$15,000</span>
+                <span class="metric-trend trend-up">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                    <polyline points="7 7 17 7 17 17"></polyline>
+                  </svg>
+                  5.1% from last month
+                </span>
+              </div>
+
+              <!-- Total expences -->
+              <div class="metric-group">
+                <span class="metric-label">Total expences</span>
+                <span class="metric-val">$6,700</span>
+                <span class="metric-trend trend-down">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="7" y1="7" x2="17" y2="17"></line>
+                    <polyline points="17 7 17 17 7 17"></polyline>
+                  </svg>
+                  15.5% from last month
+                </span>
+              </div>
+
+              <!-- Saved balance -->
+              <div class="metric-group">
+                <span class="metric-label">Saved balance</span>
+                <span class="metric-val">$8,300</span>
+                <span class="metric-trend trend-up">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                    <polyline points="7 7 17 7 17 17"></polyline>
+                  </svg>
+                  20.7% from last month
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- MIDDLE ROW: Monthly Spending Limit & Tax Tip Card -->
+          <div class="middle-row">
+            <!-- Monthly spending limit -->
+            <div class="card spending-limit-card">
+              <div>
+                <div class="spending-card-header">
+                  <div>
+                    <h3 class="card-title">Monthly spending limit</h3>
+                    <span class="card-subtitle">Recipient accounts</span>
+                  </div>
+                  <button class="btn-icon-subtle" id="btn-edit-limit" aria-label="Edit spending limit">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M12 20h9"></path>
+                      <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <div class="spending-progress-container">
+                <div class="spending-progress-bar">
+                  <div class="spending-progress-fill" id="spending-bar-fill"></div>
+                </div>
+                <div class="spending-amounts">
+                  <span id="spending-spent">$8,600</span>
+                  <span id="spending-limit">$10,000</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Optimize your budget with these quick tips -->
+            <div class="card tips-card">
+              <div class="tips-content">
+                <h3 class="card-title">Optimize your budget with these quick tips</h3>
+                <p class="tips-desc">Start preparing for the 2025 tax season by saving 10–15% for deductions.</p>
+                <a href="#tips-modal" class="tips-link" id="link-read-more">
+                  <span>Read more</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
+                </a>
+              </div>
+              <!-- Mosaic Graphic Elements -->
+              <div class="tips-mosaic-graphic">
+                <div class="mosaic-tile"></div>
+                <div class="mosaic-tile"></div>
+                <div class="mosaic-tile"></div>
+                <div class="mosaic-tile"></div>
+                <div class="mosaic-tile"></div>
+                <div class="mosaic-tile"></div>
+                <div class="mosaic-tile"></div>
+                <div class="mosaic-tile"></div>
+                <div class="mosaic-tile"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- BOTTOM ROW: Cost Analysis, Financial Health, Goal Tracker -->
+          <div class="bottom-row">
+
+            <!-- 1. Cost analysis -->
+            <div class="card cost-analysis-card">
+              <div class="cost-card-header">
+                <div>
+                  <h3 class="card-title">Cost analysis</h3>
+                  <span class="card-subtitle">Spending overview</span>
+                </div>
+                <button class="pill-select" id="btn-month-filter">
+                  <span>January</span>
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </button>
+              </div>
+
+              <div class="cost-amount">$8,450</div>
+
+              <!-- Segmented Horizontal Bar -->
+              <div class="cost-segment-bar">
+                <div class="segment-item" style="width: 18%; background-color: var(--cat-housing);" title="Housing: 18%"></div>
+                <div class="segment-item" style="width: 7%; background-color: var(--cat-debt);" title="Debt payments: 7%"></div>
+                <div class="segment-item" style="width: 6%; background-color: var(--cat-food);" title="Food: 6%"></div>
+                <div class="segment-item" style="width: 9%; background-color: var(--cat-transport);" title="Transportation: 9%"></div>
+                <div class="segment-item" style="width: 10%; background-color: var(--cat-healthcare);" title="Healthcare: 10%"></div>
+                <div class="segment-item" style="width: 17%; background-color: var(--cat-investments);" title="Investments: 17%"></div>
+                <div class="segment-item" style="width: 33%; background-color: var(--cat-other);" title="Other: 33%"></div>
+              </div>
+
+              <!-- Categorical List -->
+              <div class="cost-breakdown-list">
+                <div class="cost-item">
+                  <div class="cost-item-left">
+                    <span class="cost-dot" style="background-color: var(--cat-housing);"></span>
+                    <span>Housing</span>
+                  </div>
+                  <span class="cost-percent">18%</span>
+                </div>
+                <div class="cost-item">
+                  <div class="cost-item-left">
+                    <span class="cost-dot" style="background-color: var(--cat-debt);"></span>
+                    <span>Debt payments</span>
+                  </div>
+                  <span class="cost-percent">7%</span>
+                </div>
+                <div class="cost-item">
+                  <div class="cost-item-left">
+                    <span class="cost-dot" style="background-color: var(--cat-food);"></span>
+                    <span>Food</span>
+                  </div>
+                  <span class="cost-percent">6%</span>
+                </div>
+                <div class="cost-item">
+                  <div class="cost-item-left">
+                    <span class="cost-dot" style="background-color: var(--cat-transport);"></span>
+                    <span>Transportation</span>
+                  </div>
+                  <span class="cost-percent">9%</span>
+                </div>
+                <div class="cost-item">
+                  <div class="cost-item-left">
+                    <span class="cost-dot" style="background-color: var(--cat-healthcare);"></span>
+                    <span>Healthcare</span>
+                  </div>
+                  <span class="cost-percent">10%</span>
+                </div>
+                <div class="cost-item">
+                  <div class="cost-item-left">
+                    <span class="cost-dot" style="background-color: var(--cat-investments);"></span>
+                    <span>Investments</span>
+                  </div>
+                  <span class="cost-percent">17%</span>
+                </div>
+                <div class="cost-item">
+                  <div class="cost-item-left">
+                    <span class="cost-dot" style="background-color: var(--cat-other);"></span>
+                    <span>Other</span>
+                  </div>
+                  <span class="cost-percent">33%</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 2. Financial health -->
+            <div class="card financial-health-card">
+              <div class="health-header">
+                <div>
+                  <h3 class="card-title">Financial health</h3>
+                  <span class="card-subtitle">Current status</span>
+                </div>
+                <button class="pill-select" id="btn-health-period">
+                  <span>30d</span>
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </button>
+              </div>
+
+              <div class="health-val">$15,780</div>
+              <div class="metric-trend trend-up">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7 7 17 7 17 17"></polyline>
+                </svg>
+                17.5% from last month
+              </div>
+
+              <!-- Animated Speedometer Gauge -->
+              <div class="health-gauge-container">
+                <svg class="gauge-svg" viewBox="0 0 180 110">
+                  <defs>
+                    <linearGradient id="gauge-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stop-color="#f5c425" />
+                      <stop offset="60%" stop-color="#98d839" />
+                      <stop offset="100%" stop-color="#82cb15" />
+                    </linearGradient>
+                  </defs>
+                  <!-- Background Track Arc -->
+                  <path class="gauge-bg" d="M 20 95 A 70 70 0 0 1 160 95" />
+                  <!-- Dynamic Colored Gauge Arc -->
+                  <path class="gauge-meter" id="gauge-meter-path" d="M 20 95 A 70 70 0 0 1 160 95" />
+                </svg>
+                <div class="gauge-inner-info">
+                  <span class="gauge-pct" id="gauge-number">75%</span>
+                  <span class="gauge-label">Of monthly income saved</span>
+                </div>
+              </div>
+
+              <p class="health-footer-note">Based on aggregated transaction metrics over the past 30 days</p>
+            </div>
+
+            <!-- 3. Goal tracker -->
+            <div class="card goal-tracker-card">
+              <div class="goal-header">
+                <h3 class="card-title">Goal tracker</h3>
+                <button class="pill-select" id="btn-add-goal">
+                  <span>+ Add goals</span>
+                </button>
+              </div>
+
+              <!-- This year section -->
+              <div class="goal-group-label">This year</div>
+              <div class="goal-item">
+                <div class="goal-icon-wrapper">
+                  <!-- 3D-styled Reserve Treasure Chest / Safe Box -->
+                  <svg width="28" height="28" viewBox="0 0 36 36" fill="none">
+                    <rect x="3" y="10" width="30" height="20" rx="5" fill="#f1f5f9"/>
+                    <rect x="5" y="12" width="26" height="16" rx="3.5" fill="#e2e8f0"/>
+                    <rect x="3" y="10" width="30" height="8" rx="4" fill="#cbd5e1"/>
+                    <rect x="14" y="14" width="8" height="8" rx="2" fill="#82cb15"/>
+                    <circle cx="18" cy="18" r="1.5" fill="#ffffff"/>
+                  </svg>
+                </div>
+                <div class="goal-details">
+                  <div class="goal-title-row">
+                    <span class="goal-name">Reserve</span>
+                    <span class="goal-amounts">$7,000 <span>/ $10,000</span></span>
+                  </div>
+                  <div class="goal-progress-bar">
+                    <div class="goal-progress-fill fill-green" style="width: 70%;"></div>
+                  </div>
+                  <span class="goal-time-left">Left to save 4 months</span>
+                </div>
+              </div>
+
+              <!-- Long term section -->
+              <div class="goal-group-label" style="margin-top: 14px;">Long term</div>
+              
+              <!-- Travel -->
+              <div class="goal-item">
+                <div class="goal-icon-wrapper">
+                  <!-- Travel Suitcase Icon -->
+                  <svg width="28" height="28" viewBox="0 0 36 36" fill="none">
+                    <rect x="6" y="11" width="24" height="20" rx="4.5" fill="#fed7aa"/>
+                    <rect x="8" y="13" width="20" height="16" rx="3" fill="#ffedd5"/>
+                    <path d="M14 11V7C14 5.89543 14.8954 5 16 5H20C21.1046 5 22 5.89543 22 7V11" stroke="#f97316" stroke-width="2"/>
+                    <line x1="13" y1="11" x2="13" y2="31" stroke="#fb923c" stroke-width="2"/>
+                    <line x1="23" y1="11" x2="23" y2="31" stroke="#fb923c" stroke-width="2"/>
+                    <circle cx="10" cy="31" r="1.5" fill="#94a3b8"/>
+                    <circle cx="26" cy="31" r="1.5" fill="#94a3b8"/>
+                  </svg>
+                </div>
+                <div class="goal-details">
+                  <div class="goal-title-row">
+                    <span class="goal-name">Travel</span>
+                    <span class="goal-amounts">$2,500 <span>/ $4,000</span></span>
+                  </div>
+                  <div class="goal-progress-bar">
+                    <div class="goal-progress-fill fill-orange" style="width: 62.5%;"></div>
+                  </div>
+                  <span class="goal-time-left">Left to save 3 months</span>
+                </div>
+              </div>
+
+              <!-- Car -->
+              <div class="goal-item">
+                <div class="goal-icon-wrapper">
+                  <!-- Car Icon -->
+                  <svg width="28" height="28" viewBox="0 0 36 36" fill="none">
+                    <path d="M6 20L10 11C10.8 9.5 12.3 8.5 14 8.5H22C23.7 8.5 25.2 9.5 26 11L30 20V26H6V20Z" fill="#e2e8f0"/>
+                    <path d="M11 16L13 11H23L25 16H11Z" fill="#cbd5e1"/>
+                    <circle cx="11" cy="26" r="3.5" fill="#475569"/>
+                    <circle cx="25" cy="26" r="3.5" fill="#475569"/>
+                    <circle cx="11" cy="26" r="1.5" fill="#f8fafc"/>
+                    <circle cx="25" cy="26" r="1.5" fill="#f8fafc"/>
+                    <rect x="7" y="20" width="3" height="2" rx="1" fill="#f59e0b"/>
+                    <rect x="26" y="20" width="3" height="2" rx="1" fill="#f59e0b"/>
+                  </svg>
+                </div>
+                <div class="goal-details">
+                  <div class="goal-title-row">
+                    <span class="goal-name">Car</span>
+                    <span class="goal-amounts">$1,600 <span>/ $20,000</span></span>
+                  </div>
+                  <div class="goal-progress-bar">
+                    <div class="goal-progress-fill fill-orange" style="width: 8%;"></div>
+                  </div>
+                  <span class="goal-time-left">Left to save 3 years 6 months</span>
+                </div>
+              </div>
+
+              <!-- Real estate -->
+              <div class="goal-item">
+                <div class="goal-icon-wrapper">
+                  <!-- Real Estate Villa Icon -->
+                  <svg width="28" height="28" viewBox="0 0 36 36" fill="none">
+                    <polygon points="18,5 4,16 9,16 9,29 27,29 27,16 32,16" fill="#e2e8f0"/>
+                    <polygon points="18,4 3,16 6,16 18,7 30,16 33,16" fill="#94a3b8"/>
+                    <rect x="15" y="21" width="6" height="8" fill="#64748b" rx="1"/>
+                    <rect x="12" y="14" width="4" height="4" fill="#cbd5e1" rx="0.5"/>
+                    <rect x="20" y="14" width="4" height="4" fill="#cbd5e1" rx="0.5"/>
+                  </svg>
+                </div>
+                <div class="goal-details">
+                  <div class="goal-title-row">
+                    <span class="goal-name">Real estate</span>
+                    <span class="goal-amounts">$8,300 <span>/ $70,000</span></span>
+                  </div>
+                  <div class="goal-progress-bar">
+                    <div class="goal-progress-fill fill-orange" style="width: 12%;"></div>
+                  </div>
+                  <span class="goal-time-left">Left to save 5 years 8 months</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ==========================================
+             RIGHT COLUMN: MY CARD & TRANSACTIONS
+             ========================================== -->
+        <div class="dashboard-right-col">
+
+          <!-- 1. My Card & Quick Actions -->
+          <div class="card my-card-section">
+            <div class="my-card-header">
+              <div>
+                <h3 class="card-title">My card</h3>
+                <span class="card-subtitle">Quick actions</span>
+              </div>
+              <button class="pill-select" id="btn-add-card">
+                <span>+ Add card</span>
+              </button>
+            </div>
+
+            <!-- Card Stack Carousel -->
+            <div class="card-stack-carousel" id="card-carousel">
+              <!-- Peeking Second Card in background -->
+              <div class="credit-card back" id="credit-card-back">
+                <div class="card-top-row">
+                  <span class="card-type">Credit card</span>
+                  <span style="font-weight: 700; font-size: 13px; opacity: 0.8;">MC</span>
+                </div>
+                <div class="card-chip"></div>
+                <div class="card-number">•••• •••• •••• 4120</div>
+                <div class="card-bottom-row">
+                  <span class="card-holder">Michael Johnson</span>
+                  <span class="card-exp">09/28</span>
+                </div>
+              </div>
+
+              <!-- Main Front Lime Visa Card -->
+              <div class="credit-card front" id="credit-card-front">
+                <div class="card-top-row">
+                  <span class="card-type">Debit card</span>
+                  <span class="card-visa-logo">VISA</span>
+                </div>
+                <div class="card-chip"></div>
+                <div class="card-number">•••• •••• •••• 7890</div>
+                <div class="card-bottom-row">
+                  <span class="card-holder">Michael Johnson</span>
+                  <span class="card-exp">03/30</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 5 Quick Action Buttons -->
+            <div class="quick-actions-row">
+              <!-- Top up -->
+              <button class="action-btn" data-action="Top up">
+                <div class="action-icon-box">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="18" height="18" rx="4"></rect>
+                    <line x1="12" y1="8" x2="12" y2="16"></line>
+                    <line x1="8" y1="12" x2="16" y2="12"></line>
+                  </svg>
+                </div>
+                <span class="action-label">Top up</span>
+              </button>
+
+              <!-- Send -->
+              <button class="action-btn" data-action="Send">
+                <div class="action-icon-box">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 19V5M5 12l7-7 7 7"/>
+                  </svg>
+                </div>
+                <span class="action-label">Send</span>
+              </button>
+
+              <!-- Request -->
+              <button class="action-btn" data-action="Request">
+                <div class="action-icon-box">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 5v14M5 12l7 7 7-7"/>
+                  </svg>
+                </div>
+                <span class="action-label">Request</span>
+              </button>
+
+              <!-- History -->
+              <button class="action-btn" data-action="History">
+                <div class="action-icon-box">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="9"></circle>
+                    <polyline points="12 7 12 12 15 15"></polyline>
+                  </svg>
+                </div>
+                <span class="action-label">History</span>
+              </button>
+
+              <!-- More -->
+              <button class="action-btn" data-action="More">
+                <div class="action-icon-box">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="1.5"></circle>
+                    <circle cx="19" cy="12" r="1.5"></circle>
+                    <circle cx="5" cy="12" r="1.5"></circle>
+                  </svg>
+                </div>
+                <span class="action-label">More</span>
+              </button>
+            </div>
+
+            <!-- Quick Payment Section -->
+            <div class="quick-payment-section">
+              <div class="quick-pay-header">
+                <span>Quick payment</span>
+                <button class="btn-icon-subtle" aria-label="More options">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                    <circle cx="12" cy="5" r="1"></circle>
+                    <circle cx="12" cy="12" r="1"></circle>
+                    <circle cx="12" cy="19" r="1"></circle>
+                  </svg>
+                </button>
+              </div>
+
+              <div class="contacts-row">
+                <!-- Davis -->
+                <div class="contact-item" data-name="Davis">
+                  <svg class="contact-avatar" viewBox="0 0 38 38">
+                    <circle cx="19" cy="19" r="19" fill="#e2e8f0"/>
+                    <circle cx="19" cy="14" r="6" fill="#fbcfe8"/>
+                    <path d="M13 12C13 9 16 8 19 8C22 8 25 9 25 12C24 13 22 13 19 12Z" fill="#713f12"/>
+                    <path d="M8 34C8 28 13 24 19 24C25 24 30 28 30 34" fill="#3b82f6"/>
+                  </svg>
+                  <span class="contact-name">Davis</span>
+                </div>
+
+                <!-- Elli -->
+                <div class="contact-item" data-name="Elli">
+                  <svg class="contact-avatar" viewBox="0 0 38 38">
+                    <circle cx="19" cy="19" r="19" fill="#fce7f3"/>
+                    <circle cx="19" cy="15" r="6" fill="#fde047"/>
+                    <path d="M12 14C12 9 15 8 19 8C23 8 26 9 26 14C26 18 24 20 22 21L19 17L16 21C14 20 12 18 12 14Z" fill="#d97706"/>
+                    <path d="M8 34C8 28 13 24 19 24C25 24 30 28 30 34" fill="#ec4899"/>
+                  </svg>
+                  <span class="contact-name">Elli</span>
+                </div>
+
+                <!-- Leo -->
+                <div class="contact-item" data-name="Leo">
+                  <svg class="contact-avatar" viewBox="0 0 38 38">
+                    <circle cx="19" cy="19" r="19" fill="#e0f2fe"/>
+                    <circle cx="19" cy="14" r="6" fill="#fed7aa"/>
+                    <path d="M13 11C13 8 16 7 19 7C22 7 25 8 25 11L24 13H14L13 11Z" fill="#1e293b"/>
+                    <path d="M8 34C8 28 13 24 19 24C25 24 30 28 30 34" fill="#0284c7"/>
+                  </svg>
+                  <span class="contact-name">Leo</span>
+                </div>
+
+                <!-- Amanda -->
+                <div class="contact-item" data-name="Amanda">
+                  <svg class="contact-avatar" viewBox="0 0 38 38">
+                    <circle cx="19" cy="19" r="19" fill="#fef3c7"/>
+                    <circle cx="19" cy="15" r="6" fill="#fbcfe8"/>
+                    <path d="M11 15C11 8 15 7 19 7C23 7 27 8 27 15C27 19 25 22 23 23L19 18L15 23C13 22 11 19 11 15Z" fill="#ca8a04"/>
+                    <path d="M8 34C8 28 13 24 19 24C25 24 30 28 30 34" fill="#eab308"/>
+                  </svg>
+                  <span class="contact-name">Amanda</span>
+                </div>
+
+                <!-- Ann -->
+                <div class="contact-item" data-name="Ann">
+                  <svg class="contact-avatar" viewBox="0 0 38 38">
+                    <circle cx="19" cy="19" r="19" fill="#ede9fe"/>
+                    <circle cx="19" cy="14" r="6" fill="#fde047"/>
+                    <path d="M12 13C12 9 15 8 19 8C23 8 26 9 26 13C25 15 23 15 19 14Z" fill="#854d0e"/>
+                    <path d="M8 34C8 28 13 24 19 24C25 24 30 28 30 34" fill="#8b5cf6"/>
+                  </svg>
+                  <span class="contact-name">Ann</span>
+                </div>
+
+                <!-- Sin -->
+                <div class="contact-item" data-name="Sin">
+                  <svg class="contact-avatar" viewBox="0 0 38 38">
+                    <circle cx="19" cy="19" r="19" fill="#dcfce7"/>
+                    <circle cx="19" cy="14" r="6" fill="#fed7aa"/>
+                    <path d="M12 12C12 8 15 7 19 7C23 7 26 8 26 12C24 13 23 13 19 12Z" fill="#0f172a"/>
+                    <path d="M8 34C8 28 13 24 19 24C25 24 30 28 30 34" fill="#10b981"/>
+                  </svg>
+                  <span class="contact-name">Sin</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 2. Transaction History -->
+          <div class="card tx-card">
+            <div class="tx-header">
+              <h3 class="card-title">Transaction history</h3>
+              <button class="pill-select" id="btn-tx-period">
+                <span>7d</span>
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+            </div>
+
+            <!-- Sub Header -->
+            <div class="tx-sub-header">
+              <span class="tx-sort-btn">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                  <line x1="12" y1="19" x2="12" y2="5"></line>
+                  <polyline points="5 12 12 5 19 12"></polyline>
+                </svg>
+                Name
+              </span>
+              <span>Amount</span>
+            </div>
+
+            <!-- List of 7 transactions matching image -->
+            <div class="tx-list" id="tx-list-container">
+
+              <!-- 1. Dividend payot (TD) -->
+              <div class="tx-item" data-name="Dividend payot">
+                <div class="tx-left">
+                  <div class="tx-logo-box" style="background-color: #008a00; color: #ffffff; font-weight: 800; font-size: 14px;">TD</div>
+                  <div class="tx-details">
+                    <span class="tx-title">Dividend payot</span>
+                    <span class="tx-date">25 Feb 2025</span>
+                  </div>
+                </div>
+                <div class="tx-right">
+                  <span class="tx-amount positive">+ $1,100</span>
+                  <span class="tx-status">Completed</span>
+                </div>
+              </div>
+
+              <!-- 2. orporate subscriptions (Salesforce Cloud) -->
+              <div class="tx-item" data-name="orporate subscriptions">
+                <div class="tx-left">
+                  <div class="tx-logo-box" style="background-color: #00a1e0; color: #ffffff;">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"/>
+                    </svg>
+                  </div>
+                  <div class="tx-details">
+                    <span class="tx-title">orporate subscriptions</span>
+                    <span class="tx-date">25 Feb 2025</span>
+                  </div>
+                </div>
+                <div class="tx-right">
+                  <span class="tx-amount negative">- $6,400</span>
+                  <span class="tx-status declined">Declined</span>
+                </div>
+              </div>
+
+              <!-- 3. Investment in ETF (Vanguard) -->
+              <div class="tx-item" data-name="Investment in ETF">
+                <div class="tx-left">
+                  <div class="tx-logo-box" style="background-color: #8b0000; color: #ffffff; font-family: serif; font-size: 18px; font-weight: 700;">V</div>
+                  <div class="tx-details">
+                    <span class="tx-title">Investment in ETF</span>
+                    <span class="tx-date">21 Feb 2025</span>
+                  </div>
+                </div>
+                <div class="tx-right">
+                  <span class="tx-amount negative">- $900</span>
+                  <span class="tx-status">Completed</span>
+                </div>
+              </div>
+
+              <!-- 4. Consulting services (CNX) -->
+              <div class="tx-item" data-name="Consulting services">
+                <div class="tx-left">
+                  <div class="tx-logo-box" style="background-color: #111827; color: #ffffff; font-size: 11px; font-weight: 700; letter-spacing: -0.5px;">CNX</div>
+                  <div class="tx-details">
+                    <span class="tx-title">Consulting services</span>
+                    <span class="tx-date">21 Feb 2025</span>
+                  </div>
+                </div>
+                <div class="tx-right">
+                  <span class="tx-amount negative">- $2,100</span>
+                  <span class="tx-status">Completed</span>
+                </div>
+              </div>
+
+              <!-- 5. Equipment purchase (Amazon) -->
+              <div class="tx-item" data-name="Equipment purchase">
+                <div class="tx-left">
+                  <div class="tx-logo-box" style="background-color: #131921; color: #ff9900; font-weight: 800; font-size: 12px; font-family: sans-serif;">
+                    amazon
+                  </div>
+                  <div class="tx-details">
+                    <span class="tx-title">Equipment purchase</span>
+                    <span class="tx-date">20 Feb 2025</span>
+                  </div>
+                </div>
+                <div class="tx-right">
+                  <span class="tx-amount negative">- $1,700</span>
+                  <span class="tx-status">Completed</span>
+                </div>
+              </div>
+
+              <!-- 6. Elli Harper -->
+              <div class="tx-item" data-name="Elli Harper">
+                <div class="tx-left">
+                  <svg class="tx-logo-box" viewBox="0 0 36 36" style="border-radius: 50%;">
+                    <circle cx="18" cy="18" r="18" fill="#fce7f3"/>
+                    <circle cx="18" cy="14" r="6" fill="#fbcfe8"/>
+                    <path d="M12 14C12 9 15 8 18 8C21 8 24 9 24 14C24 18 22 20 20 21L18 17L16 21C14 20 12 18 12 14Z" fill="#d97706"/>
+                    <path d="M8 32C8 26 12 23 18 23C24 23 28 26 28 32" fill="#ec4899"/>
+                  </svg>
+                  <div class="tx-details">
+                    <span class="tx-title">Elli Harper</span>
+                    <span class="tx-date">15 Feb 2025</span>
+                  </div>
+                </div>
+                <div class="tx-right">
+                  <span class="tx-amount positive">+ $600</span>
+                  <span class="tx-status">Completed</span>
+                </div>
+              </div>
+
+              <!-- 7. Davis Rowen -->
+              <div class="tx-item" data-name="Davis Rowen">
+                <div class="tx-left">
+                  <svg class="tx-logo-box" viewBox="0 0 36 36" style="border-radius: 50%;">
+                    <circle cx="18" cy="18" r="18" fill="#e2e8f0"/>
+                    <circle cx="18" cy="14" r="6" fill="#fed7aa"/>
+                    <path d="M12 11C12 8 15 7 18 7C21 7 24 8 24 11L23 13H13L12 11Z" fill="#1e293b"/>
+                    <path d="M8 32C8 26 12 23 18 23C24 23 28 26 28 32" fill="#3b82f6"/>
+                  </svg>
+                  <div class="tx-details">
+                    <span class="tx-title">Davis Rowen</span>
+                    <span class="tx-date">15 Feb 2025</span>
+                  </div>
+                </div>
+                <div class="tx-right">
+                  <span class="tx-amount positive">+ $800</span>
+                  <span class="tx-status">Completed</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- Interactive Modal Container -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="modal-title">Action</h3>
+        <button class="btn-icon-subtle" id="modal-close">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body" id="modal-body">
+        Modal content here...
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- JavaScript -->
+  <script src="app.js"></script>
+</body>
+</html>
